@@ -17,7 +17,7 @@ var fs         = require("fs"),
     handlebars = require("gulp-compile-handlebars"),
     source     = require("vinyl-source-stream");
 
-var jsFiles          = ["*.js", "assets/javascripts/*.js"],
+var jsFiles          = ["*.js", "assets/javascripts/*.js", "assets/javascripts/components/**/*.js"],
     handlebarOptions = {
       helpers: {
         assetPath: function (path, context) {
