@@ -13,16 +13,16 @@ slug_ignore=$(for ignore in "${ignores[@]}"; do echo $ignore; done |
 
 git checkout -b $release_branch
 
-echo "-- Removing Files ..."
+echo "-- Removing files ..."
 ls -a | egrep -v "$slug_ignore" | xargs rm -rv
 echo "-- Done"
 
-echo "-- Copying Files ..."
+echo "-- Copying files ..."
 mv -v ./public/* ./
 rm -rv ./public
 echo "-- Done"
 
-echo "-- Creating Slug ..."
+echo "-- Creating slug ${release_branch} ..."
 git add .
 git commit -m "${commit}"
 echo "-- Done"

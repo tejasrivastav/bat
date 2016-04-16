@@ -1,18 +1,20 @@
 #!/usr/bin/env bash
 
+. ./bin/release
+
 current_branch=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
 release_branch="release-${RELEASE}"
 commit="Release -- ${RELEASE}"
 
-# git checkout -b $release_branch
+git checkout -b $release_branch
 
 if [ `git branch | sed -e "s/[*]/ /g" | egrep "^[[:space:]]+${release_branch}$"` ];
 then
-    echo "-- Deploying Slug ${release_branch} ..."
+    echo "-- Deploying slug ${release_branch} ..."
     # git push -f origin production
     echo "-- Done"
 else
-    echo "-- ERROR: Deploy Slug '${release_branch}' Not Found"
+    echo "-- ERROR: '${release_branch}' deploy slug not found"
 fi
 
-# git checkout $current_branch
+git checkout $current_branch
