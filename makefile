@@ -2,6 +2,8 @@
 
 all: clean test run
 
+NOW = $(date +'%Y-%m-%d-%H-%M-%S')
+
 npm: npm-clean npm-init
 
 npm-clean:
@@ -35,7 +37,8 @@ build: clean
 	gulp build
 
 local-release: build
-	RELEASE=`date +'%Y-%m-%d-%H-%M-%S'` ./bin/release
+	RELEASE=$(NOW) ./bin/release
 
 deploy: build
-	RELEASE=`date +'%Y-%m-%d-%H-%M-%S'` ./bin/release && ./bin/deploy
+	RELEASE=$(NOW) ./bin/release
+	RELEASE=$(NOW) ./bin/deploy
