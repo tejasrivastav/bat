@@ -3106,6 +3106,11 @@
       "from": "lcid@>=1.0.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/lcid/-/lcid-1.0.0.tgz"
     },
+    "lcov-parse": {
+      "version": "0.0.6",
+      "from": "lcov-parse@0.0.6",
+      "resolved": "https://registry.npmjs.org/lcov-parse/-/lcov-parse-0.0.6.tgz"
+    },
     "leven": {
       "version": "1.0.2",
       "from": "leven@>=1.0.2 <2.0.0",
@@ -3268,6 +3273,11 @@
       "version": "4.1.2",
       "from": "lodash.tostring@>=4.0.0 <5.0.0",
       "resolved": "https://registry.npmjs.org/lodash.tostring/-/lodash.tostring-4.1.2.tgz"
+    },
+    "log-driver": {
+      "version": "1.2.4",
+      "from": "log-driver@1.2.4",
+      "resolved": "https://registry.npmjs.org/log-driver/-/log-driver-1.2.4.tgz"
     },
     "log-symbols": {
       "version": "1.0.2",
@@ -4329,11 +4339,6 @@
       "from": "simple-is@>=0.2.0 <0.3.0",
       "resolved": "https://registry.npmjs.org/simple-is/-/simple-is-0.2.0.tgz"
     },
-    "sji": {
-      "version": "0.0.1",
-      "from": "sji@latest",
-      "resolved": "https://registry.npmjs.org/sji/-/sji-0.0.1.tgz"
-    },
     "slash": {
       "version": "1.0.0",
       "from": "slash@1.0.0"
@@ -4869,7 +4874,7 @@
         },
         "through2": {
           "version": "0.6.5",
-          "from": "through2@>=0.6.1 <0.7.0"
+          "from": "through2@0.6.5"
         },
         "vinyl": {
           "version": "0.4.6",
