@@ -6,10 +6,9 @@ current_branch=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
 release_branch="release-${RELEASE}"
 commit="Release -- ${RELEASE}"
 
-git checkout -b $release_branch
-
 if [ `git branch | sed -e "s/[*]/ /g" | egrep "^[[:space:]]+${release_branch}$"` ];
 then
+    git checkout $release_branch
     echo "-- Deploying slug ${release_branch} ..."
     # git push -f origin production
     echo "-- Done"
