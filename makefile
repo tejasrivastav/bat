@@ -2,19 +2,19 @@
 
 all: clean test run
 
+npm-clean:
+	rm -rf ./node_modules
+
 npm-init:
 	npm install -g npm@3.8.6
 	npm install -g gulp@3.9.1
 
-npm-clean:
-	rm -rf node_modules
-
-npm: npm-init
+npm: npm-clean npm-init
 	npm install
 
 shrinkwrap: npm
 	npm update
-	rm -f npm-shrinkwrap.json
+	rm -f ./npm-shrinkwrap.json
 	npm prune
 	npm shrinkwrap
 
@@ -31,5 +31,5 @@ run: clean
 	npm install
 	npm start
 
-build: shrinkwrap clean
+build: clean
 	gulp build

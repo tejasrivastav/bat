@@ -1,21 +1,22 @@
 "use strict";
 
-var fs         = require("fs"),
-    browserify = require("browserify"),
-    del        = require("del"),
-    gulp       = require("gulp"),
-    rename     = require("gulp-rename"),
-    jsHint     = require("gulp-jshint"),
-    jscs       = require("gulp-jscs"),
-    streamify  = require("gulp-streamify"),
-    uglify     = require("gulp-uglify"),
-    watchify   = require("gulp-watchify"),
-    rev        = require("gulp-rev"),
-    buffer     = require("gulp-buffer"),
-    nodemon    = require("gulp-nodemon"),
-    sass       = require("gulp-sass"),
-    handlebars = require("gulp-compile-handlebars"),
-    source     = require("vinyl-source-stream");
+var fs          = require("fs"),
+    browserify  = require("browserify"),
+    del         = require("del"),
+    gulp        = require("gulp"),
+    rename      = require("gulp-rename"),
+    jsHint      = require("gulp-jshint"),
+    jscs        = require("gulp-jscs"),
+    streamify   = require("gulp-streamify"),
+    uglify      = require("gulp-uglify"),
+    watchify    = require("gulp-watchify"),
+    rev         = require("gulp-rev"),
+    buffer      = require("gulp-buffer"),
+    nodemon     = require("gulp-nodemon"),
+    sass        = require("gulp-sass"),
+    handlebars  = require("gulp-compile-handlebars"),
+    runSequence = require("run-sequence"),
+    source      = require("vinyl-source-stream");
 
 var jsFiles          = ["*.js", "assets/javascripts/*.js", "assets/javascripts/components/**/*.js"],
     handlebarOptions = {
@@ -121,9 +122,30 @@ gulp.task("styles:watch", ["styles:compile"], function () {
   gulp.watch("./assets/stylesheets/**/*.scss", ["styles:compile"]);
 });
 
-gulp.task("build", ["lint", "fonts", "images", "scripts", "styles", "assets", "html"]);
+gulp.task("build", function (callback) {
+  runSequence(
+    "lint",
+    "fonts",
+    "images",
+    "scripts",
+    "styles",
+    "assets",
+    "html",
+    callback
+  );
+});
 
-gulp.task("watch", ["lint", "fonts", "images", "scripts:watch", "styles:watch", "html:compile"]);
+gulp.task("watch", function (callback) {
+  runSequence(
+    "lint",
+    "fonts",
+    "images",
+    "scripts:watch",
+    "styles:watch",
+    "html:compile",
+    callback
+  );
+});
 
 gulp.task("serve", ["watch"], function () {
   var options = {
