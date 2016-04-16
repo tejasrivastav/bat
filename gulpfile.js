@@ -22,7 +22,7 @@ var jsFiles          = ["*.js", "assets/javascripts/*.js", "assets/javascripts/c
     handlebarOptions = {
       helpers: {
         assetPath: function (path, context) {
-          return ["/assets", context.data.root[path]].join("/");
+          return [context.data.root[path]].join("/");
         }
       }
     };
@@ -49,7 +49,7 @@ gulp.task("fonts", function () {
 gulp.task("images", function () {
   return gulp.src("./assets/images/**/*.*", {
     base: "assets/images/"
-  }).pipe(gulp.dest("./public/assets/images/"));
+  }).pipe(gulp.dest("./public/images/"));
 });
 
 gulp.task("scripts", function () {
@@ -65,7 +65,7 @@ gulp.task("styles:compile", function () {
   return gulp.src("./assets/stylesheets/application.scss")
     .pipe(sass().on("error", sass.logError))
     .pipe(rename("main.css"))
-    .pipe(gulp.dest("./public/assets/"));
+    .pipe(gulp.dest("./public/"));
 });
 
 gulp.task("styles", function () {
@@ -89,7 +89,7 @@ gulp.task("html:compile", function () {
 });
 
 gulp.task("html", function () {
-  var manifest = JSON.parse(fs.readFileSync("./public/assets/manifest.json", "utf8"));
+  var manifest = JSON.parse(fs.readFileSync("./public/manifest.json", "utf8"));
   return gulp.src("./index.hbs")
     .pipe(handlebars(manifest, handlebarOptions))
     .pipe(rename("index.html"))
@@ -101,12 +101,12 @@ gulp.task("assets", function () {
     base: "tmp/assets"
   })
     .pipe(rev())
-    .pipe(gulp.dest("./public/assets/"))
+    .pipe(gulp.dest("./public/"))
     .pipe(rev.manifest({
       path : "manifest.json",
       merge: true
     }))
-    .pipe(gulp.dest("./public/assets/"));
+    .pipe(gulp.dest("./public/"));
 });
 
 gulp.task("scripts:watch", watchify(function (watchify) {
@@ -115,7 +115,7 @@ gulp.task("scripts:watch", watchify(function (watchify) {
       watch: true
     }))
     .pipe(rename("main.js"))
-    .pipe(gulp.dest("./public/assets/"));
+    .pipe(gulp.dest("./public/"));
 }));
 
 gulp.task("styles:watch", ["styles:compile"], function () {
