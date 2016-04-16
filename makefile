@@ -2,14 +2,14 @@
 
 all: clean test run
 
+npm: npm-clean npm-init
+
 npm-clean:
 	rm -rf ./node_modules
 
 npm-init:
 	npm install -g npm@3.8.6
 	npm install -g gulp@3.9.1
-
-npm: npm-clean npm-init
 	npm install
 
 shrinkwrap: npm
@@ -33,3 +33,9 @@ run: clean
 
 build: clean
 	gulp build
+
+local-release: build
+	RELEASE=`date +'%Y-%m-%d-%H-%M-%S'` ./bin/release
+
+deploy: build
+	RELEASE=`date +'%Y-%m-%d-%H-%M-%S'` ./bin/release && ./bin/deploy
