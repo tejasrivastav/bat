@@ -9,7 +9,7 @@ var Template = function (self) {
     /* jscs ignore:start */
     <div>
       <h1>CBGA - BAT (Budget Analysis Tool)</h1>
-      <img src="/images/cbga_logo.png" alt="CBGA Logo" />
+      <img src="images/cbga_logo.png" alt="CBGA Logo" />
       <label>
         <input type="checkbox"
                checked={self.state.isChecked}
