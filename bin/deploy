@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+now="`date +%Y-%m-%d-%H-%M-%S`"
+branch="release-${now}"
+commit="Release -- ${now}"
+
+declare -a ignores=("." ".." ".git" ".gitignore")
+
+slug_ignore=$(for ignore in "${ignores[@]}"; do echo $ignore; done |
+		  cat - .gitignore |
+		  while read line; do echo -n "|^${line}$"; done |
+		  sed -e "s/[.]/\\\./g" -e "s/[*]/\\\*/g" -e "s/[|]//")
+
+git checkout -b branch
+
+echo "-- Removing Files ..."
+ls -a | egrep -v "$slug_ignore" | xargs rm -rv
+echo "-- Done"
+
+echo "-- Copying Files ..."
+mv -v ./public/* ./
+rm -rv ./public
+echo "-- Done"
+
+echo "-- Creating Slug ..."
+git add .
+git commit -m "${commit}"
+echo "-- Done"
+
+git checkout master
