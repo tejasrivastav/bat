@@ -10,7 +10,7 @@ if [ `git branch | sed -e "s/[*]/ /g" | egrep "^[[:space:]]+${release_branch}$"`
 then
     git checkout $release_branch
     echo "-- Deploying slug ${release_branch} ..."
-    # git push -f origin production
+    git push -f origin production
     echo "-- Done"
 else
     echo "-- ERROR: '${release_branch}' deploy slug not found"
