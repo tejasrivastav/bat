@@ -1,7 +1,7 @@
 sudo: false
 language: node_js
 node_js:
-  - "4"
+  - "4.4.3"
 compiler: clang-3.6
 env:
   - CXX=clang-3.6
@@ -17,10 +17,9 @@ branches:
   except:
     - gh-pages
 before_script:
-  - npm install -g npm@3.8.6
-  - npm install -g gulp@3.9.1
+  - npm install -g gulp
 script:
   - gulp lint
   - npm test
 after_script:
-  - if [[ `node --version` == *v4.4.1* ]]; then cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js; fi
+  - if [[ `node --version` == *v4.4.3* ]]; then cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js; fi

@@ -8,7 +8,7 @@ npm-clean:
 	rm -rf ./node_modules
 
 npm-init:
-	npm install -g npm@3.8.6
+	npm install -g npm@2.15.1
 	npm install -g gulp@3.9.1
 	npm install
 
