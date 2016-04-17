@@ -43,7 +43,7 @@ gulp.task("lint", function () {
 gulp.task("fonts", function () {
   return gulp.src("./assets/fonts/**/*.*", {
     base: "assets/fonts/"
-  }).pipe(gulp.dest("./public/assets/fonts/"));
+  }).pipe(gulp.dest("./public/fonts/"));
 });
 
 gulp.task("images", function () {

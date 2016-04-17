@@ -7,9 +7,9 @@ commit="Release -- ${RELEASE}"
 declare -a ignores=("." ".." ".git" ".gitignore" "bin")
 
 slug_ignore=$(for ignore in "${ignores[@]}"; do echo $ignore; done |
-		  cat - .gitignore |
-		  while read line; do echo -n "|^${line}$"; done |
-		  sed -e "s/[.]/\\\./g" -e "s/[*]/\\\*/g" -e "s/[|]//")
+      cat - .gitignore |
+      while read line; do echo -n "|^${line}$"; done |
+      sed -e "s/[.]/\\\./g" -e "s/[*]/\\\*/g" -e "s/[|]//")
 
 git checkout -b $release_branch
 
