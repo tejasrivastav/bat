@@ -1,5 +1,9 @@
 "use strict";
 
-var BAT = {};
+var BAT = {
+  transform: function (inputCSV) {
+    return inputCSV;
+  }
+};
 
 module.exports = BAT;
