@@ -81,7 +81,7 @@ var main = function (options) {
     }
     lineNumber += 1;
   }).on("close", function () {
-    var parsedJSON = JSON.stringify(parsedRows, null, 2);
+    var parsedJSON = JSON.stringify(BAT.postParseOperation(parsedRows), null, 2);
     if (_.isEmpty(options["out"])) {
       console.log(parsedJSON);
       return;
