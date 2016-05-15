@@ -21,6 +21,7 @@
     "allowComments": true,
     "allowRegex"   : true
   },
+  "maxErrors"                             : 1000,
   "validateIndentation"                   : 2,
   "validateQuoteMarks"                    : "\"",
   "disallowMultipleLineStrings"           : true,
