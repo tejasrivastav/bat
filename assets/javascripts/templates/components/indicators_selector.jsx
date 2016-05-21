@@ -1,7 +1,8 @@
 "use strict";
 
 var React    = require("react"),
-    ReactDOM = require("react-dom");
+    ReactDOM = require("react-dom"),
+    Link     = require("react-router").Link;
 
 var Template = function (self) {
   return (
@@ -15,16 +16,20 @@ var Template = function (self) {
         <div className="indicator-title-text">CATEGORY</div>
         <div className="clear-all"></div>
       </div>
-      <div className="indicator-list">
-        {self.props.indicators.map(function (indicator) {
+      <ul className="indicator-list">
+        {self.props.indicators.map(function (indicator, indicatorIndex) {
           return (
-            <div className="indicator-list-item">
-              <div className="indicator-list-item-text">{indicator.name}</div>
+            <li className="indicator-list-item" key={indicatorIndex}>
+              <Link to={`/indicator/${indicator.slug}`}
+                    className="indicator-list-item-text">
+                {indicator.name}
+              </Link>
+
               <div className="indicator-list-item-selected"></div>
-            </div>
+            </li>
           );
         })}
-      </div>
+      </ul>
     </div>
     /* jshint ignore:end */
     /* jscs ignore:end */

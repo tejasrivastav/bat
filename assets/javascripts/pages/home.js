@@ -1,9 +1,14 @@
 "use strict";
 
-var React    = require("react"),
-    ReactDOM = require("react-dom"),
-    _        = require("lodash"),
-    $        = require("jquery");
+var React       = require("react"),
+    ReactDOM    = require("react-dom"),
+    ReactRouter = require("react-router"),
+    _           = require("lodash"),
+    $           = require("jquery");
+
+var Router      = ReactRouter.Router,
+    Route       = ReactRouter.Route,
+    hashHistory = ReactRouter.hashHistory;
 
 var DATA = require("../utils/data").DATA;
 
@@ -34,11 +39,13 @@ var HomePage = React.createClass({
 });
 
 /* istanbul ignore next */
-var homePage = function (container, props) {
+var homePage = function (container) {
   return ReactDOM.render(
-    React.createElement(HomePage, props),
-    document.getElementById(container)
-  );
+    React.createElement(Router, {
+      history: hashHistory,
+      routes : require("../utils/routes")(HomePage)
+    }),
+    document.getElementById(container));
 };
 
 module.exports = {
