@@ -15,7 +15,7 @@ var Template = function (self) {
           <div className="project-title">CBGA Story Generator</div>
           <div className="project-description">Some random generated text</div>
         </div>
-        <IndicatorsSelector />
+        <IndicatorsSelector indicators={self.state.indicators}/>
 
         <div className="credits">
           <div className="credits-info">
