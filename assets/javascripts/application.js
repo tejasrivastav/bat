@@ -1,7 +1,7 @@
 "use strict";
 
 var $        = require("jquery"),
-    homePage = require("./components/pages/home").DOM;
+    homePage = require("./pages/home").DOM;
 
 window.jQuery = $;
 

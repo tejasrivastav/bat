@@ -21,7 +21,10 @@ var _           = require("lodash"),
     runSequence = require("run-sequence"),
     source      = require("vinyl-source-stream");
 
-var jsFiles          = ["*.js", "assets/javascripts/*.js", "assets/javascripts/components/**/*.js"],
+var jsFiles          = ["*.js",
+                        "assets/javascripts/*.js",
+                        "assets/javascripts/pages/**/*.js",
+                        "assets/javascripts/components/**/*.js"],
     handlebarOptions = {
       helpers: {
         assetPath: function (path, context) {
