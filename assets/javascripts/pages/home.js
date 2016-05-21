@@ -5,58 +5,26 @@ var React    = require("react"),
     _        = require("lodash"),
     $        = require("jquery");
 
-var RTP = React.PropTypes;
+var DATA = require("../utils/data").DATA;
 
 var HomePageTemplate = require("../templates/pages/home.jsx");
 
 var HomePage = React.createClass({
 
-  propTypes: {
-    labelOn : RTP.string,
-    labelOff: RTP.string,
-    dataUrl : RTP.string
-  },
-
   getInitialState: function () {
     return {
-      isChecked: false,
-      states: [],
       indicators: []
     };
   },
-  getListOfIndicators:function(indicators){
-    var indicatorsName = [];
-    indicators.forEach(function(value){
-      var currentObject = {
-        name: value["name"],
-        slug: value["slug"]
-      }
-      indicatorsName.push(currentObject);
-    });
-    return indicatorsName;
-  },
-  loadStatesData:function(){
-    console.log(this.props.dataUrl);
-    $.ajax({
-      url: this.props.dataUrl,
-      dataType: 'json',
-      type: 'GET',
-      success: function(data) {
-        this.setState({states: data});
-        var returnedIndicators = this.getListOfIndicators(data[0].indicators);
-        this.setState({indicators: returnedIndicators});
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
-  },
-  componentDidMount: function(){
-    this.loadStatesData();
-  },
-  onChange: function () {
+
+  componentDidMount: function () {
     this.setState({
-      isChecked: !this.state.isChecked
+      indicators: _.chain(DATA)
+        .get("[0].indicators")
+        .map(function (indicator) {
+          return _.pick(indicator, ["name", "slug"]);
+        })
+        .valueOf()
     });
   },
 
@@ -67,8 +35,6 @@ var HomePage = React.createClass({
 
 /* istanbul ignore next */
 var homePage = function (container, props) {
-  container = (container || "main-container");
-  props     = (props || {labelOn: "", labelOff: "",dataUrl:""});
   return ReactDOM.render(
     React.createElement(HomePage, props),
     document.getElementById(container)
