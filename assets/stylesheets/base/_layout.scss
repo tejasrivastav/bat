@@ -91,6 +91,7 @@ main {
   .indicator-list{
     background-color: rgb(255, 255, 255);
     color: #707491;
+    overflow-y: auto;
     .indicator-list-item {
       padding: .5em;
     }

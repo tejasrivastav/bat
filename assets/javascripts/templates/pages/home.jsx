@@ -3,6 +3,9 @@
 var React    = require("react"),
     ReactDOM = require("react-dom");
 
+var IndicatorsSelector = require("../../components/indicators_selector"),
+    StatesSelector     = require("../../components/states_selector");
+
 var Template = function (self) {
   return (
     /* jshint ignore:start */
@@ -13,21 +16,10 @@ var Template = function (self) {
           <div className="project-title">CBGA Story Generator</div>
           <div className="project-description">Some random generated text</div>
         </div>
-        <div className="indicator">
-          <div className="search-box">
-            <input type="text" placeholder="Search for schemes or indicator" />
-          </div>
-          <div className="indicator-title">
-            <div className="indicator-title-text">CATEGORY</div>
-            <div className="clear-all"></div>
-          </div>
-          <div className="indicator-list">
-            <div className="indicator-list-item">
-              <div className="indicator-list-item-text">ABC</div>
-              <div className="indicator-list-item-selected"></div>
-            </div>
-          </div>
-        </div>
+        <IndicatorsSelector location={self.props.location}
+                            params={self.props.params}
+                            indicators={self.state.indicators} />
+
         <div className="credits">
           <div className="credits-info">
             <span>@credits</span>
@@ -41,18 +33,11 @@ var Template = function (self) {
         </div>
       </div>
       <div className="content">
-        <div className="query-selector">
-          <div className="states">
-            <div className="states-header">
-              <div className="states-header-title">States</div>
-              <div className="btn btn-primary">Select State</div>
-            </div>
-            <div className="states-selected">
-              <div className="states-selected-active"></div>
-              <div className="states-selected-inactive">No states selected</div>
-            </div>
-          </div>
-        </div>
+        <StatesSelector location={self.props.location}
+                        params={self.props.params}
+                        states={self.state.states}
+                        selectedStates={self.state.selectedStates} />
+
         <div className="visual">
           <div className="report">
             <div className="report-header">
