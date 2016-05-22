@@ -18,14 +18,21 @@ var HomePage = React.createClass({
 
   getInitialState: function () {
     return {
+      states    : [],
       indicators: []
     };
   },
 
-  componentDidMount: function () {
+  componentWillMount: function () {
     this.setState({
+      states    : _.chain(DATA)
+        .map(function (state) {
+          return _.pick(state, ["name", "slug"]);
+        })
+        .valueOf(),
       indicators: _.chain(DATA)
-        .get("[0].indicators")
+        .first()
+        .get("indicators")
         .map(function (indicator) {
           return _.pick(indicator, ["name", "slug"]);
         })

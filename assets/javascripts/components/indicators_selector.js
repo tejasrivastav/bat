@@ -15,11 +15,9 @@ var IndicatorsSelector = React.createClass({
   },
 
   componentDidMount: function () {
-    if (!_.isEmpty(this.props.params)) {
-      this.setState({
-        selectedIndicatorSlug: this.props.params.indicatorSlug
-      });
-    }
+    this.setState({
+      selectedIndicatorSlug: _.get(this.props, "params.indicatorSlug")
+    });
   },
 
   render: function () {
