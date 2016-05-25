@@ -20,7 +20,8 @@ var Template = function (self) {
         {self.props.indicators.map(function (indicator, indicatorIndex) {
           return (
             <li className="indicator-list-item" key={indicatorIndex}>
-              <Link to={`/indicator/${indicator.slug}`}
+              <Link to={self.getIndicatorLink(indicator)}
+                    onClick={(event) => self.onIndicatorSelection(indicator)}
                     className="indicator-list-item-text">
                 {indicator.name}
               </Link>

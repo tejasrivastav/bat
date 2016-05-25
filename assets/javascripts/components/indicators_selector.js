@@ -10,14 +10,35 @@ var IndicatorsSelector = React.createClass({
 
   getInitialState: function () {
     return {
-      selectedIndicatorSlug: null
+      selectedIndicator: null
     };
   },
 
   componentDidMount: function () {
-    this.setState({
-      selectedIndicatorSlug: _.get(this.props, "params.indicatorSlug")
+    var self = this;
+    self.setState({
+      selectedIndicator: _.find(self.props.indicators, function (indicator) {
+        return _.eq(self.props.location.query.indicator, indicator.slug);
+      })
     });
+  },
+
+  getIndicatorLink: function (indicator) {
+    return {
+      pathname: this.props.location.pathname,
+      query   : {
+        indicator: indicator.slug,
+        states   : _.get(this.props, "location.query.states", "")
+      }
+    };
+  },
+
+  onIndicatorSelection: function (indicator) {
+    if (!_.eq(this.props.location.query.indicator, indicator.slug)) {
+      this.setState({
+        selectedIndicator: indicator
+      });
+    }
   },
 
   render: function () {

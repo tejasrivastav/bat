@@ -7,10 +7,17 @@ var React    = require("react"),
 
 var stateSelectionDisplay = function (self) {
   if (_.isEmpty(self.state.selectedStates)) {
-    return (<div className="states-selected-inactive">No states selected</div>);
+    return (
+      <div className="states-selected-inactive">
+        No states selected
+      </div>
+    );
   }
-
-  return (<div>{_.chain(self.state.selectedStates).map((state) => state.name).join(", ").valueOf()}</div>)
+  return (
+    <div className="states-selected-active">
+      {_.chain(self.state.selectedStates).map((state) => state.name).join(", ").valueOf()}
+    </div>
+  );
 };
 
 var Template = function (self) {

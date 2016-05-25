@@ -27,25 +27,26 @@ var StatesSelector = React.createClass({
 
   getSelectedStatesSlug: function () {
     return _.chain(this.props)
-      .get("location.query.selectedStates", "")
+      .get("location.query.states", "")
       .split("|")
-      .filter(function (selectedState) {
-        return !_.isEmpty(selectedState);
+      .filter(function (state) {
+        return !_.isEmpty(state);
       })
       .valueOf();
   },
 
-  getStateLink: function (state) {
+  getStateLink: function (selectedState) {
     return {
-      pathname: this.props.location.pathname,
-      query   : {
-        selectedStates: _.chain(this.props)
-          .get("location.query.selectedStates", "")
+      pathname : this.props.location.pathname,
+      query    : {
+        indicator: this.props.location.query.indicator,
+        states: _.chain(this.props)
+          .get("location.query.states", "")
           .split("|")
-          .filter(function (selectedState) {
-            return !_.isEmpty(selectedState);
+          .filter(function (state) {
+            return !_.isEmpty(state);
           })
-          .concat(state.slug)
+          .concat(selectedState.slug)
           .uniq()
           .join("|")
           .valueOf()
@@ -56,9 +57,7 @@ var StatesSelector = React.createClass({
   onStateSelection: function (state) {
     if (!_.includes(this.getSelectedStatesSlug(), state.slug)) {
       this.setState({
-        selectedStates: _.chain(this.state.selectedStates)
-          .concat(state)
-          .valueOf()
+        selectedStates: _.concat(this.state.selectedStates, state)
       });
     }
   },
