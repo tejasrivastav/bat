@@ -2,7 +2,8 @@
 
 var React    = require("react"),
     ReactDOM = require("react-dom"),
-    _        = require("lodash");
+    _        = require("lodash"),
+    Fuse     = require("fuse.js");
 
 var StatesSelectorTemplate = require("../templates/components/states_selector.jsx");
 
@@ -10,19 +11,23 @@ var StatesSelector = React.createClass({
 
   getInitialState: function () {
     return {
-      selectedStates: []
+      states        : this.props.states,
+      selectedStates: [],
+      stateSearch   : new Fuse(this.props.states, {keys: ["name"]})
     };
   },
 
   componentDidMount: function () {
-    var selectedStatesSlugs = this.getSelectedStatesSlug();
-    this.setState({
-      selectedStates: _.chain(this.props.states)
+    var self                = this,
+        selectedStatesSlugs = self.getSelectedStatesSlug();
+    self.setState({
+      selectedStates: _.chain(self.props.states)
         .filter(function (state) {
           return _.includes(selectedStatesSlugs, state.slug);
         })
         .valueOf()
     });
+    self.onStateSearch      = _.debounce(self.onStateSearch, 300);
   },
 
   getSelectedStatesSlug: function () {
@@ -37,10 +42,10 @@ var StatesSelector = React.createClass({
 
   getStateLink: function (selectedState) {
     return {
-      pathname : this.props.location.pathname,
-      query    : {
+      pathname: this.props.location.pathname,
+      query   : {
         indicator: this.props.location.query.indicator,
-        states: _.chain(this.props)
+        states   : _.chain(this.props)
           .get("location.query.states", "")
           .split("|")
           .filter(function (state) {
@@ -52,6 +57,12 @@ var StatesSelector = React.createClass({
           .valueOf()
       }
     };
+  },
+
+  onStateSearch: function (keyword) {
+    this.setState({
+      states: _.isEmpty(keyword) ? this.props.states : this.state.stateSearch.search(keyword)
+    });
   },
 
   onStateSelection: function (state) {
