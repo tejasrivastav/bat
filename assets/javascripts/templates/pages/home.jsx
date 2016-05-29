@@ -76,6 +76,16 @@ var Template = function (self) {
               <div className="report-footer-item">Share</div>
             </div>
           </div>
+          <div className="report-meta">
+            <div className="budget-attributes">
+              <div className="budget-attributes-title">Budget Attributes</div>
+              <div className="budget-attributes-labels">
+                <span className="budget-attribute selected">be</span>
+                <span className="budget-attribute">ac</span>
+                <span className="budget-attribute">re</span>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="content-footer">
           <div className="information hr">
