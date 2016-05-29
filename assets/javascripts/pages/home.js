@@ -1,62 +1,42 @@
 "use strict";
 
-var React    = require("react"),
-    ReactDOM = require("react-dom"),
-    _        = require("lodash"),
-    $        = require("jquery");
+var React       = require("react"),
+    ReactDOM    = require("react-dom"),
+    ReactRouter = require("react-router"),
+    _           = require("lodash"),
+    $           = require("jquery");
 
-var RTP = React.PropTypes;
+var Router      = ReactRouter.Router,
+    Route       = ReactRouter.Route,
+    hashHistory = ReactRouter.hashHistory;
+
+var DATA = require("../utils/data").DATA;
 
 var HomePageTemplate = require("../templates/pages/home.jsx");
 
 var HomePage = React.createClass({
 
-  propTypes: {
-    labelOn : RTP.string,
-    labelOff: RTP.string,
-    dataUrl : RTP.string
-  },
-
   getInitialState: function () {
     return {
-      isChecked: false,
-      states: [],
+      states    : [],
       indicators: []
     };
   },
-  getListOfIndicators:function(indicators){
-    var indicatorsName = [];
-    indicators.forEach(function(value){
-      var currentObject = {
-        name: value["name"],
-        slug: value["slug"]
-      }
-      indicatorsName.push(currentObject);
-    });
-    return indicatorsName;
-  },
-  loadStatesData:function(){
-    console.log(this.props.dataUrl);
-    $.ajax({
-      url: this.props.dataUrl,
-      dataType: 'json',
-      type: 'GET',
-      success: function(data) {
-        this.setState({states: data});
-        var returnedIndicators = this.getListOfIndicators(data[0].indicators);
-        this.setState({indicators: returnedIndicators});
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
-  },
-  componentDidMount: function(){
-    this.loadStatesData();
-  },
-  onChange: function () {
+
+  componentWillMount: function () {
     this.setState({
-      isChecked: !this.state.isChecked
+      states    : _.chain(DATA)
+        .map(function (state) {
+          return _.pick(state, ["name", "slug"]);
+        })
+        .valueOf(),
+      indicators: _.chain(DATA)
+        .first()
+        .get("indicators")
+        .map(function (indicator) {
+          return _.pick(indicator, ["name", "slug"]);
+        })
+        .valueOf()
     });
   },
 
@@ -66,13 +46,13 @@ var HomePage = React.createClass({
 });
 
 /* istanbul ignore next */
-var homePage = function (container, props) {
-  container = (container || "main-container");
-  props     = (props || {labelOn: "", labelOff: "",dataUrl:""});
+var homePage = function (container) {
   return ReactDOM.render(
-    React.createElement(HomePage, props),
-    document.getElementById(container)
-  );
+    React.createElement(Router, {
+      history: hashHistory,
+      routes : require("../utils/routes")(HomePage)
+    }),
+    document.getElementById(container));
 };
 
 module.exports = {
