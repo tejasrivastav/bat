@@ -1,0 +1,38 @@
+.content-body {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 463px;
+}
+
+.report {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .report-header {
+    padding: .5em;
+    .report-title {
+      font-size: 1.8em;
+    }
+    .report-subtitle {
+      font-style: italic;
+    }
+  }
+  .report-body {
+    padding: .5em;
+  }
+  .report-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    padding: .5em;
+  }
+}
+
+.graph {
+  width: 792.6px;
+  height: 340px;
+  background: antiquewhite;
+}

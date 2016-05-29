@@ -14,7 +14,9 @@ var Template = function (self) {
       <div className="bg-primary side-nav">
         <div className="project-info">
           <div className="project-title">CBGA Story Generator</div>
-          <div className="project-description">Some random generated text</div>
+          <div className="project-description">
+            Nam dapibus nisl vitae elit fringilla rutrum. Aenean sollicitudin, erat a elementum rutrum, neque sem pretium metus, quis mollis 
+          </div>
         </div>
         <IndicatorsSelector location={self.props.location}
                             params={self.props.params}
@@ -33,7 +35,33 @@ var Template = function (self) {
         </div>
       </div>
       <div className="content">
-        <div className="visual">
+        <div className="content-header">
+          <StatesSelector location={self.props.location}
+                          params={self.props.params}
+                          states={self.state.states}
+                          selectedStates={self.state.selectedStates} />
+          <div className="meta">
+            <div className="meta-info">
+              <div className="meta-info-title">
+                <span>Title </span>
+                <span>[Indicator]</span>
+              </div>
+              <div className="meta-info-value">
+                <span>Resource:&nbsp;</span>
+                <span>value</span>
+              </div>
+              <div className="meta-info-value">
+                <span>Notes:&nbsp;</span>
+                <span>value</span>
+              </div>
+              <div className="meta-info-value">
+                <span>Unit:&nbsp;</span>
+                <span>value</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="content-body">
           <div className="report">
             <div className="report-header">
               <div className="report-title">Union Budget Value for Year 2014</div>
@@ -48,34 +76,18 @@ var Template = function (self) {
               <div className="report-footer-item">Share</div>
             </div>
           </div>
-          <div className="meta">
-            <div className="meta-info">
-              <div className="meta-info-title">Title</div>
-              <div className="meta-info-unit">Unit</div>
-              <div className="meta-info-resource">Source</div>
-              <div className="meta-info-notes">Notes</div>
-            </div>
-            <StatesSelector location={self.props.location}
-                            params={self.props.params}
-                            states={self.state.states}
-                            selectedStates={self.state.selectedStates} />
-          </div>
         </div>
-        <div className="information-container">
-          <div className="information">
+        <div className="content-footer">
+          <div className="information hr">
             <div className="information-title">Budget Insights</div>
             <div className="information-content">
-              Some random generated text
-              Some random generated text
-              Some random generated text
+              Nam dapibus nisl vitae elit fringilla rutrum. Aenean sollicitudin, erat a elementum rutrum, neque sem pretium metus, quis mollis 
             </div>
           </div>
           <div className="information">
-            <div className="information-title">Budget Insights</div>
+            <div className="information-title">Description [Indicator]</div>
             <div className="information-content">
-              Some random genarated text
-              Some random genarated text
-              Some random genarated text
+              Nam dapibus nisl vitae elit fringilla rutrum. Aenean sollicitudin, erat a elementum rutrum, neque sem pretium metus, quis mollis 
             </div>
           </div>
         </div>
