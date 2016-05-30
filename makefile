@@ -25,8 +25,8 @@ tests: lint
 	npm run assets-tests
 
 coverage: lint
-	npm run coverage
 	npm run assets-coverage
+	npm run coverage
 
 clean:
 	./node_modules/.bin/gulp clean
