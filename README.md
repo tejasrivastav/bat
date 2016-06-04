@@ -23,7 +23,7 @@ Prerequisites:
 - `make run` to run project on default server `localhost` on port `4001` [link](http://localhost:4001)
 
 # Building
-- `make local-release` to release locally & run using `./bin/server`
+- `make local-release` to release locally & run it using `./bin/server`
 - `make deploy` to do a production release directly on github-pages (make sure to run it from `production` branch)
 
 # Contributors
