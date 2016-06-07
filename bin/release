@@ -27,4 +27,5 @@ git add .
 git commit -m "${commit}"
 echo "-- Done"
 
+echo "$ git checkout ${release_branch} # to test local release"
 git checkout $current_branch

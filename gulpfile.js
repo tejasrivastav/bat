@@ -1,31 +1,55 @@
 "use strict";
 
-var fs          = require("fs"),
+var _           = require("lodash"),
+    fs          = require("fs"),
     browserify  = require("browserify"),
+    watchify    = require("watchify"),
     del         = require("del"),
     gulp        = require("gulp"),
     rename      = require("gulp-rename"),
+    util        = require("gulp-util"),
     jsHint      = require("gulp-jshint"),
     jscs        = require("gulp-jscs"),
     streamify   = require("gulp-streamify"),
     uglify      = require("gulp-uglify"),
-    watchify    = require("gulp-watchify"),
     rev         = require("gulp-rev"),
     buffer      = require("gulp-buffer"),
     nodemon     = require("gulp-nodemon"),
     sass        = require("gulp-sass"),
+    sourcemaps  = require("gulp-sourcemaps"),
     handlebars  = require("gulp-compile-handlebars"),
     runSequence = require("run-sequence"),
     source      = require("vinyl-source-stream");
 
-var jsFiles          = ["*.js", "assets/javascripts/*.js", "assets/javascripts/components/**/*.js"],
+var jsFiles          = ["*.js",
+                        "assets/javascripts/*.js",
+                        "assets/javascripts/pages/**/*.js",
+                        "assets/javascripts/components/**/*.js"],
     handlebarOptions = {
       helpers: {
         assetPath: function (path, context) {
           return [context.data.root[path]].join("/");
         }
       }
+    },
+    scriptsWatcher   = watchify(browserify(_.assign({
+      entries: ["./assets/javascripts/application.js"],
+      debug  : true
+    }, watchify.args))),
+    scriptsBundler   = function () {
+      return scriptsWatcher.bundle()
+        .on("error", util.log.bind(util, "Browserify Error"))
+        .pipe(source("main.js"))
+        .pipe(buffer())
+        .pipe(sourcemaps.init({
+          loadMaps: true
+        }))
+        .pipe(sourcemaps.write("./"))
+        .pipe(gulp.dest("./public/"));
     };
+
+scriptsWatcher.on("update", scriptsBundler);
+scriptsWatcher.on("log", util.log);
 
 gulp.task("clean", function () {
   return del(["public", "tmp"]);
@@ -63,8 +87,12 @@ gulp.task("scripts", function () {
 
 gulp.task("styles:compile", function () {
   return gulp.src("./assets/stylesheets/application.scss")
+    .pipe(sourcemaps.init({
+      loadMaps: true
+    }))
     .pipe(sass().on("error", sass.logError))
     .pipe(rename("main.css"))
+    .pipe(sourcemaps.write("./"))
     .pipe(gulp.dest("./public/"));
 });
 
@@ -109,19 +137,6 @@ gulp.task("assets", function () {
     .pipe(gulp.dest("./public/"));
 });
 
-gulp.task("scripts:watch", watchify(function (watchify) {
-  return gulp.src(["./assets/javascripts/application.js"])
-    .pipe(watchify({
-      watch: true
-    }))
-    .pipe(rename("main.js"))
-    .pipe(gulp.dest("./public/"));
-}));
-
-gulp.task("styles:watch", ["styles:compile"], function () {
-  gulp.watch("./assets/stylesheets/**/*.scss", ["styles:compile"]);
-});
-
 gulp.task("build", function (callback) {
   runSequence(
     "lint",
@@ -133,6 +148,12 @@ gulp.task("build", function (callback) {
     "html",
     callback
   );
+});
+
+gulp.task("scripts:watch", scriptsBundler);
+
+gulp.task("styles:watch", ["styles:compile"], function () {
+  gulp.watch("./assets/stylesheets/**/*.scss", ["styles:compile"]);
 });
 
 gulp.task("watch", function (callback) {

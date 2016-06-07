@@ -57,6 +57,6 @@
   "jquery"       : false,
   "node"         : true,
   "globals"      : {
-    "jest": false
+    "jest"  : true
   }
 }

@@ -9,7 +9,6 @@ npm-clean:
 
 npm-init:
 	npm install -g npm@2.15.1
-	npm install -g gulp@3.9.1
 	npm install
 
 shrinkwrap: npm
@@ -19,20 +18,25 @@ shrinkwrap: npm
 	npm shrinkwrap
 
 lint:
-	gulp lint
+	./node_modules/.bin/gulp lint
 
 tests: lint
-	npm test
+	npm run tests
+	npm run assets-tests
+
+coverage: lint
+	npm run assets-coverage
+	npm run coverage
 
 clean:
-	gulp clean
+	./node_modules/.bin/gulp clean
 
 run: clean
 	npm install
 	npm start
 
 build: clean
-	gulp build
+	./node_modules/.bin/gulp build
 
 local-release: build
 	RELEASE=`date +'%Y-%m-%d-%H-%M-%S'` ./bin/release
