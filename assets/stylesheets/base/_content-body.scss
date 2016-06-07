@@ -2,16 +2,23 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 463px;
+  flex: 1;
 }
 
 .report {
-  width: 80%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   .report-header {
     padding: .5em;
+    display: flex;
+    justify-content: space-between;
+    .report-header-left,
+    .report-header-right {
+      display: flex;
+      flex-direction: column;
+    }
     .report-title {
       font-size: 1.8em;
     }
@@ -21,6 +28,8 @@
   }
   .report-body {
     padding: .5em;
+    flex: 1;
+    display: flex;
   }
   .report-footer {
     display: flex;
@@ -32,19 +41,11 @@
 }
 
 .graph {
-  width: 792.6px;
-  height: 340px;
+  width: 100%;
   background: antiquewhite;
 }
 
-.report-meta {
-  display: flex;
-  flex: 1;
-  padding: 1em;
-}
-
 .budget-attributes {
-  margin-top: 45px;
   width: 100%;
 }
 

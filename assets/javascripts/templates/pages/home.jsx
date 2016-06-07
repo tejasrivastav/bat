@@ -35,37 +35,23 @@ var Template = function (self) {
         </div>
       </div>
       <div className="content">
-        <div className="content-header">
-          <StatesSelector location={self.props.location}
-                          params={self.props.params}
-                          states={self.state.states}
-                          selectedStates={self.state.selectedStates} />
-          <div className="meta">
-            <div className="meta-info">
-              <div className="meta-info-title">
-                <span>Title </span>
-                <span>[Indicator]</span>
-              </div>
-              <div className="meta-info-value">
-                <span>Resource:&nbsp;</span>
-                <span>value</span>
-              </div>
-              <div className="meta-info-value">
-                <span>Notes:&nbsp;</span>
-                <span>value</span>
-              </div>
-              <div className="meta-info-value">
-                <span>Unit:&nbsp;</span>
-                <span>value</span>
-              </div>
-            </div>
-          </div>
-        </div>
         <div className="content-body">
           <div className="report">
             <div className="report-header">
-              <div className="report-title">Union Budget Value for Year 2014</div>
-              <div className="report-subtitle"> select states to explore more</div>
+              <div className="report-header-left">
+                <div className="report-title">Union Budget Value for Year 2014</div>
+                <div className="report-subtitle"> select states to explore more</div>
+              </div>
+              <div className="report-header-right">
+                <div className="budget-attributes">
+                  <div className="budget-attributes-title">Budget Attributes</div>
+                  <div className="budget-attributes-labels">
+                    <span className="budget-attribute selected">be</span>
+                    <span className="budget-attribute">ac</span>
+                    <span className="budget-attribute">re</span>
+                  </div>
+                </div>
+              </div>  
             </div>
             <div className="report-body">
               <div className="graph"></div>
@@ -77,14 +63,30 @@ var Template = function (self) {
             </div>
           </div>
           <div className="report-meta">
-            <div className="budget-attributes">
-              <div className="budget-attributes-title">Budget Attributes</div>
-              <div className="budget-attributes-labels">
-                <span className="budget-attribute selected">be</span>
-                <span className="budget-attribute">ac</span>
-                <span className="budget-attribute">re</span>
+            <div className="meta">
+              <div className="meta-info">
+                <div className="meta-info-title">
+                  <span>Title </span>
+                  <span>[Indicator]</span>
+                </div>
+                <div className="meta-info-value">
+                  <span>Resource:&nbsp;</span>
+                  <span>value</span>
+                </div>
+                <div className="meta-info-value">
+                  <span>Notes:&nbsp;</span>
+                  <span>value</span>
+                </div>
+                <div className="meta-info-value">
+                  <span>Unit:&nbsp;</span>
+                  <span>value</span>
+                </div>
               </div>
             </div>
+            <StatesSelector location={self.props.location}
+                            params={self.props.params}
+                            states={self.state.states}
+                            selectedStates={self.state.selectedStates} />
           </div>
         </div>
         <div className="content-footer">

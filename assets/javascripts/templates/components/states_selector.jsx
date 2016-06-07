@@ -24,7 +24,7 @@ var Template = function (self) {
   return (
     /* jshint ignore:start */
     /* jscs ignore:start */
-    <div className="state-selector hr">
+    <div className="state-selector">
       
       <div className="states">
         <div className="states-header">
