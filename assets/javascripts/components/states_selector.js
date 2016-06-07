@@ -2,7 +2,8 @@
 
 var React    = require("react"),
     ReactDOM = require("react-dom"),
-    _        = require("lodash");
+    _        = require("lodash"),
+    Fuse     = require("fuse.js");
 
 var StatesSelectorTemplate = require("../templates/components/states_selector.jsx");
 
@@ -10,42 +11,47 @@ var StatesSelector = React.createClass({
 
   getInitialState: function () {
     return {
-      selectedStates: []
+      states        : this.props.states,
+      selectedStates: [],
+      stateSearch   : new Fuse(this.props.states, {keys: ["name"]})
     };
   },
 
   componentDidMount: function () {
-    var selectedStatesSlugs = this.getSelectedStatesSlug();
-    this.setState({
-      selectedStates: _.chain(this.props.states)
+    var self                = this,
+        selectedStatesSlugs = self.getSelectedStatesSlug();
+    self.setState({
+      selectedStates: _.chain(self.props.states)
         .filter(function (state) {
           return _.includes(selectedStatesSlugs, state.slug);
         })
         .valueOf()
     });
+    self.onStateSearch      = _.debounce(self.onStateSearch, 300);
   },
 
   getSelectedStatesSlug: function () {
     return _.chain(this.props)
-      .get("location.query.selectedStates", "")
+      .get("location.query.states", "")
       .split("|")
-      .filter(function (selectedState) {
-        return !_.isEmpty(selectedState);
+      .filter(function (state) {
+        return !_.isEmpty(state);
       })
       .valueOf();
   },
 
-  getStateLink: function (state) {
+  getStateLink: function (selectedState) {
     return {
       pathname: this.props.location.pathname,
       query   : {
-        selectedStates: _.chain(this.props)
-          .get("location.query.selectedStates", "")
+        indicator: this.props.location.query.indicator,
+        states   : _.chain(this.props)
+          .get("location.query.states", "")
           .split("|")
-          .filter(function (selectedState) {
-            return !_.isEmpty(selectedState);
+          .filter(function (state) {
+            return !_.isEmpty(state);
           })
-          .concat(state.slug)
+          .concat(selectedState.slug)
           .uniq()
           .join("|")
           .valueOf()
@@ -53,12 +59,16 @@ var StatesSelector = React.createClass({
     };
   },
 
+  onStateSearch: function (keyword) {
+    this.setState({
+      states: _.isEmpty(keyword) ? this.props.states : this.state.stateSearch.search(keyword)
+    });
+  },
+
   onStateSelection: function (state) {
     if (!_.includes(this.getSelectedStatesSlug(), state.slug)) {
       this.setState({
-        selectedStates: _.chain(this.state.selectedStates)
-          .concat(state)
-          .valueOf()
+        selectedStates: _.concat(this.state.selectedStates, state)
       });
     }
   },

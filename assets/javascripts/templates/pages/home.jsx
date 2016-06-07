@@ -33,11 +33,6 @@ var Template = function (self) {
         </div>
       </div>
       <div className="content">
-        <StatesSelector location={self.props.location}
-                        params={self.props.params}
-                        states={self.state.states}
-                        selectedStates={self.state.selectedStates} />
-
         <div className="visual">
           <div className="report">
             <div className="report-header">
@@ -60,6 +55,10 @@ var Template = function (self) {
               <div className="meta-info-resource">Source</div>
               <div className="meta-info-notes">Notes</div>
             </div>
+            <StatesSelector location={self.props.location}
+                            params={self.props.params}
+                            states={self.state.states}
+                            selectedStates={self.state.selectedStates} />
           </div>
         </div>
         <div className="information-container">
