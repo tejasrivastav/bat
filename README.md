@@ -39,7 +39,7 @@
 - Fork and submit pull requests (standard GitHub OSS house rules)
 - We follow [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript). Please run `make lint` locally
   before submitting a pull request and make sure that there are no warnings or errors.
-- That it. _Happy Hacking!_
+- Thats it. _Happy Hacking!_
 
 ## Contributors
 - [Navya B. Raju](https://github.com/navsie)

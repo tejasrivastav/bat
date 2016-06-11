@@ -4,7 +4,8 @@ var React    = require("react"),
     ReactDOM = require("react-dom");
 
 var IndicatorsSelector = require("../../components/indicators_selector"),
-    StatesSelector     = require("../../components/states_selector");
+    StatesSelector     = require("../../components/states_selector"),
+    Visualization      = require("../../components/visualization");
 
 var Template = function (self) {
   return (
@@ -15,7 +16,8 @@ var Template = function (self) {
         <div className="project-info">
           <div className="project-title">CBGA Story Generator</div>
           <div className="project-description">
-            Nam dapibus nisl vitae elit fringilla rutrum. Aenean sollicitudin, erat a elementum rutrum, neque sem pretium metus, quis mollis 
+            Nam dapibus nisl vitae elit fringilla rutrum. Aenean sollicitudin, erat a elementum rutrum, neque sem
+            pretium metus, quis mollis
           </div>
         </div>
         <IndicatorsSelector location={self.props.location}
@@ -51,11 +53,13 @@ var Template = function (self) {
                     <span className="budget-attribute">re</span>
                   </div>
                 </div>
-              </div>  
+              </div>
             </div>
-            <div className="report-body">
-              <div className="graph"></div>
-            </div>
+            <Visualization location={self.props.location}
+                           params={self.props.params}
+                           indicators={self.state.indicators}
+                           states={self.state.states} />
+
             <div className="report-footer">
               <div className="report-footer-item">Download&nbsp;|&nbsp;</div>
               <div className="report-footer-item">Embed&nbsp;|&nbsp;</div>
@@ -93,13 +97,15 @@ var Template = function (self) {
           <div className="information hr">
             <div className="information-title">Budget Insights</div>
             <div className="information-content">
-              Nam dapibus nisl vitae elit fringilla rutrum. Aenean sollicitudin, erat a elementum rutrum, neque sem pretium metus, quis mollis 
+              Nam dapibus nisl vitae elit fringilla rutrum. Aenean sollicitudin, erat a elementum rutrum, neque sem
+              pretium metus, quis mollis
             </div>
           </div>
           <div className="information">
             <div className="information-title">Description [Indicator]</div>
             <div className="information-content">
-              Nam dapibus nisl vitae elit fringilla rutrum. Aenean sollicitudin, erat a elementum rutrum, neque sem pretium metus, quis mollis 
+              Nam dapibus nisl vitae elit fringilla rutrum. Aenean sollicitudin, erat a elementum rutrum, neque sem
+              pretium metus, quis mollis
             </div>
           </div>
         </div>
