@@ -42,10 +42,10 @@
 - That it. _Happy Hacking!_
 
 ## Contributors
-- [Gaurav Godhwani](https://github.com/gggodhwani)
 - [Navya B. Raju](https://github.com/navsie)
 - [Noopur Varma](https://github.com/noopurvarma)
 - [Ranjeet Singh](https://github.com/raeoks)
+- [Suchismita Naik](https://github.com/SuchismitaNaik)
 - [Teja Srivastav](https://github.com/tejasrivastav)
 
 _PS: We always try hard to improve this documentation. If you have any suggestions or contributions, please let us know._  
