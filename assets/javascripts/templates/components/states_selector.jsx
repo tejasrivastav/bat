@@ -35,7 +35,7 @@ var Template = function (self) {
                     data-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="true">
-              Select State
+              Select State &nbsp;
               <span className="caret"></span>
             </button>
             <ul className="dropdown-menu" aria-labelledby="select-state-dropdown">
