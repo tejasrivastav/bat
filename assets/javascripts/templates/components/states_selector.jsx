@@ -15,7 +15,21 @@ var stateSelectionDisplay = function (self) {
   }
   return (
     <div className="states-selected-active">
-      {_.chain(self.state.selectedStates).map((state) => state.name).join(", ").valueOf()}
+      {self.state.selectedStates.map(function(state,i){
+        return (
+          <div className="state" key={state.slug}> 
+            <div className="state-content">
+              <span className="state-avtar">{state.name.charAt(0).toUpperCase()}</span>
+              <span className="state-name">{state.name}</span>
+            </div>
+            <span className="state-remove">
+              <span className="glyphicon glyphicon-remove"
+                onClick={(event) => self.removeState(state)}>
+              </span>
+            </span>
+          </div>
+        );
+      })}
     </div>
   );
 };
@@ -53,7 +67,6 @@ var Template = function (self) {
           </div>
         </div>
         <div className="states-selected">
-          <div className="states-selected-active"></div>
           {stateSelectionDisplay(self)}
         </div>
       </div>
